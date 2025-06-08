@@ -1,0 +1,14 @@
+<div>
+    <label for="bankName">שם הבנק</label>
+    <input type="text" id="bankName" value={{bankName}} disabled /><br />
+    <label for="branchName">שם הסניף</label>
+    <input type="text" id="branchName" [(ngModel)]="branchName" /><br />
+    <label for="branchNum">מספר הסניף</label>
+    <input type="number" id="branchNum" [(ngModel)]="branchNum" /><br />
+    <label for="accountNum">מספר חשבון</label>
+    <input type="number" id="accountNum" value={{accountNum}} disabled /><br />
+
+    <button (click)="update()">שמור</button>
+
+    <a *ngIf="jobDone" routerLink="/BankAccount">שינוי פרטים הצליח! הקש כאן לחזור לעמוד החשבון</a>
+</div>

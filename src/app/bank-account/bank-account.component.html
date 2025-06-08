@@ -1,0 +1,61 @@
+<div>
+    <button (click)="logOut()">התנתק</button>&nbsp;
+
+    <button routerLink="/ChangePassword">שנה סיסמה</button>
+
+    <br /><br />
+
+    <button routerLink="/ChangeBranch">שינוי סניף</button>
+
+</div>
+
+<div id="owner">
+    <h1>
+        Welcome to the {{data_svc.getAccountDetails()}}
+    </h1>
+    <app-account-owner [owner]="currentOwner" [edit]="editAccountOwner"></app-account-owner>
+    <br />
+    <button (click)="editAccountOwner=!editAccountOwner">
+        {{(!editAccountOwner)?"ערוך פרטי חשבון":"סיים עריכת פרטי חשבון"}}
+    </button>
+</div>
+<div [class.notshown]="editAccountOwner" id="transaction" dir=rtl>
+    <p>
+        <label for=amount>סכום:</label>
+        <input required type=number id=amount min=0 [(ngModel)]="currentAmount" />
+
+        <br />
+        <br />
+        <label for=asmachta>אסמכתא:</label>
+        <textarea required id=asmachta [(ngModel)]="currentTransactionAsmachta" minlength=4></textarea>
+
+        <br />
+        <br />
+        <label required for=taarich>תאריך:</label>
+        <input required type=date id=taarich [(ngModel)]="currentTransactionDateS" />
+
+        <br />
+        <br />
+        <label for=sugpeula>סוג פעולה:</label>
+        <select required id=sugpeula [(ngModel)]="currentTransactionType">
+            <option value="-1">נא לבחור</option>
+            <option *ngFor="let typName of transactionTypeNames; let i=index" value={{i}}>{{typName}}</option>
+        </select>
+
+        <br />
+        <br />
+        <button type="button" (click)='doTransaction();'>בצע פעולה </button>
+        <button routerLink="/DisplayTransactions">הצג תנועות</button>
+        <br />
+        <br />
+    </p>
+    <p *ngIf="!lastActionFail">
+        {{transaction}}
+    </p>
+    <p *ngIf="!lastActionFail" [class.minus]='currentBalance<0'>
+        your current balance is: {{currentBalance|currency:'ILS'}}
+    </p>
+    <p *ngIf="lastActionFail" dir="rtl">
+        פעולת נדחתה עקב חריגה צפויה מתקרת אשראי של <bdo dir="ltr">{{data_svc.getAccountDetails().limit|currency:'ILS'}}</bdo>
+    </p>
+</div>

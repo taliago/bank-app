@@ -1,0 +1,26 @@
+<div>
+    <table>
+        <caption>טבלת התנועות</caption>
+        <thead>
+            <th>מספר שורה</th>
+            <th>תאריך פעולה</th>
+            <th>סכום</th>
+            <th>סוג הפעולה</th>
+            <th>היתרה בחשבון</th>
+            <th>לחצן מחיקה</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let transaction of transactionsArr; let i=index" [class.minus]='calculateCurrentBalance(i)<0'>
+                <td>{{i+1}}</td>
+                <td>{{transaction.trnDate | date : 'dd/MM/yyyy'}}</td>
+                <td>{{transaction.amount | currency : 'ILS'}}</td>
+                <td>{{transactionTypeNames[transaction.trnTyp]}}</td>
+                <td>{{calculateCurrentBalance(i) | currency : 'ILS'}}</td>
+                <td><button (click)="delete(i)">מחק</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf = "transactionsArr.length === 0">לא נמצאו פעולות לחשבון</p>
+    <br />
+    <button routerLink="/BankAccount">חזרה</button>
+</div>

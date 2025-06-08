@@ -1,27 +1,72 @@
-# Mybank11
+#Personal Bank Account Manager – Angular Project
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.16.
+##Project Overview
+This project is a personal bank account manager built with Angular and TypeScript. It allows users to simulate basic banking operations, manage transaction history, and update account details—all within a responsive, browser-based interface.
 
-## Development server
+##Features
+###Transaction Management
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Users can perform transactions by entering the date, amount, and type (deposit or withdrawal).
 
-## Code scaffolding
+Transactions are displayed in a dynamic table that includes: serial number, date, amount, type, resulting balance, and a delete button.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Negative balances are highlighted with red row backgrounds for easy visual identification.
 
-## Build
+If there are no transactions, a friendly yellow message is shown to the user.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+###Real-Time Balance Calculation
 
-## Running unit tests
+The system automatically recalculates the account balance after each transaction.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+A running balance is displayed alongside each transaction for full transparency.
 
-## Running end-to-end tests
+###Data Persistence with Encryption
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+All transaction data and account information are stored in the browser’s localStorage.
 
-## Further help
+AES encryption is used to securely store and retrieve data, ensuring user privacy and data integrity even after page reloads.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+###Validation and Error Handling
+
+All transaction inputs are validated:
+
+Date must not be in the future and cannot precede the last transaction.
+
+Amount must be a positive number.
+
+A transaction type must be selected.
+
+Invalid inputs trigger clear, context-aware error alerts.
+
+###Branch Details Editor
+
+Users can view and edit their bank branch name and number through a dedicated interface.
+
+Other details like bank name and account number are displayed but locked from editing.
+
+Updates are saved and persisted using encrypted local storage.
+
+###Navigation and Routing
+
+Uses Angular routing to navigate between the main account screen, transaction history, and branch editor.
+
+Intuitive buttons and route links support smooth, user-friendly navigation.
+
+###Polished UI with Angular Pipes
+
+Angular currency and date pipes are used for properly formatting monetary values and dates.
+
+Transaction types are displayed as readable text, not numeric codes.
+
+Clean, readable table formatting enhances user experience.
+
+##Technologies Used
+Angular & TypeScript
+
+HTML & CSS
+
+LocalStorage with AES encryption
+
+Angular Router & Forms
+
+Angular Pipes for formatting
